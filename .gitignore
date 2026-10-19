@@ -1,0 +1,10 @@
+# Herramientas y copias locales que no forman parte del sitio
+.freebuff/
+Peleitas - copia/
+* - FINAL/
+Videoador/
+IMG2TXT/
+screenshots/
+*.log
+Thumbs.db
+desktop.ini

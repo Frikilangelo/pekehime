@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <title>Cuestionario</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <div id="start-bg-video-layer" class="start-bg-video-layer" aria-hidden="true">
+      <div class="start-bg-video-blur">
+        <video
+          id="start-bg-video"
+          class="start-bg-video"
+          src="vids/intro.mp4"
+          muted
+          loop
+          playsinline
+          preload="auto"
+          disablePictureInPicture
+        ></video>
+      </div>
+      <div class="start-bg-video-scrim"></div>
+    </div>
+
+    <div class="app">
+      <header class="header">
+        <h1 class="title">
+          <img src="img/titulo.png" alt="Pekehime Performance 2026" class="title-image" />
+        </h1>
+      </header>
+
+      <main class="main">
+        <section
+          id="interphase-screen"
+          class="card interphase-screen hidden"
+          aria-live="polite"
+        >
+          <h1 class="start-heading0 interphase-title interphase-main-title">
+            - El tipo que da una primera impresión buena, no es un buen tipo -
+          </h1>
+          <h2 class="start-heading interphase-title">Solo una de las imágenes es la correcta, ¡averigua cuál es con la ayuda de las pistas!</h2>
+          <h4 class="start-heading interphase-title">El orden de los jugadores es aleatorio en cada ronda, e iran jugando todos ahsta que acaben</h4>
+          <h4 class="start-heading interphase-title">El primer jugador tendrá más tiempo para responder que el resto de jugadores</h4>
+          <h4 class="start-heading interphase-title">Si se acaba el tiempo y no se ha seleccionado ninguna respuesta, la respuesta cuenta como incorrecta</h4>
+          <div class="actions interphase-actions">
+            <button type="button" class="btn btn-primary btn-large" id="btn-interphase-continue">
+              Continuar
+            </button>
+          </div>
+        </section>
+
+        <section id="quiz-screen" class="card quiz-screen hidden" aria-live="polite">
+          <div class="players-pool" id="players-pool" aria-label="Zona de jugadores"></div>
+          <p class="question-index" id="question-index">Pregunta 1</p>
+
+          <div class="timer-block" id="timer-block">
+            <div class="timer-row">
+              <span class="timer-message" id="timer-message">Tiempo para responder</span>
+              <span class="timer-count-wrap" aria-live="polite"
+                ><span class="timer-count" id="timer-count">30</span
+                ><span class="timer-suffix"> s</span></span
+              >
+            </div>
+            <div class="timer-bar" aria-hidden="true">
+              <div class="timer-bar-fill" id="timer-bar-fill"></div>
+            </div>
+          </div>
+
+          <h2 class="question" id="question-text"></h2>
+
+          <div class="question-media-layout">
+            <div class="question-video-block hidden" id="question-video-block">
+              <div class="question-video-frame">
+                <video
+                  id="question-video"
+                  class="question-video"
+                  playsinline
+                  preload="auto"
+                  disablePictureInPicture
+                ></video>
+                <iframe
+                  id="question-video-iframe"
+                  class="question-video-iframe hidden"
+                  title="Vídeo de la pregunta"
+                  referrerpolicy="strict-origin-when-cross-origin"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope"
+                ></iframe>
+              </div>
+            </div>
+
+            <div class="question-images-block" id="question-images-block">
+              <p class="question-video-label">Imágenes de la pregunta</p>
+              <div class="question-images-grid" id="question-images-grid"></div>
+            </div>
+          </div>
+
+          <fieldset class="answers" id="answers-fieldset">
+            <legend class="visually-hidden">Opciones de respuesta</legend>
+            <div id="answers-container"></div>
+          </fieldset>
+
+          <div class="actions">
+            <button type="button" class="btn btn-primary" id="btn-next">Responder</button>
+          </div>
+        </section>
+
+        <section id="results-screen" class="card results-screen hidden" aria-live="polite">
+          <h2 class="results-title">Resultados</h2>
+          <div class="results-entrefase-video-block question-video-block">
+            <div class="question-video-frame">
+              <video
+                id="results-entrefase-video"
+                class="results-entrefase-video"
+                src="vids/entrefases1.mp4"
+                playsinline
+                preload="none"
+                disablePictureInPicture
+                tabindex="-1"
+                aria-label="Vídeo entre el cuestionario y la ronda de precios"
+              ></video>
+            </div>
+          </div>
+          <div class="results-board-block">
+            <ul class="results-board" id="results-board"></ul>
+          </div>
+          <div class="actions results-actions">
+            <button type="button" class="btn btn-primary" id="btn-go-price">Continuar</button>
+            <button type="button" class="btn btn-primary hidden" id="btn-restart">Volver al inicio</button>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer">
+
+      </footer>
+
+      <audio
+        id="interphase-music"
+        class="visually-hidden"
+        src="music/Entrefases 1.mp3"
+        preload="auto"
+      ></audio>
+      <audio
+        id="quiz-bg-music"
+        class="visually-hidden"
+        src="music/2.mp3"
+        loop
+        preload="auto"
+      ></audio>
+    </div>
+
+    <script src="js/session.js"></script>
+    <script src="js/questions.js"></script>
+    <script src="js/quiz.js"></script>
+  </body>
+</html>

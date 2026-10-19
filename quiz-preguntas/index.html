@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <title>Inicio — Juego de preguntas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <div id="start-bg-video-layer" class="start-bg-video-layer" aria-hidden="true">
+      <div class="start-bg-video-blur">
+        <video
+          id="start-bg-video"
+          class="start-bg-video"
+          src="vids/intro.mp4"
+          muted
+          loop
+          playsinline
+          preload="auto"
+          disablePictureInPicture
+        ></video>
+      </div>
+      <div class="start-bg-video-scrim"></div>
+    </div>
+
+    <div class="app">
+      <header class="header">
+        <h1 class="title">
+          <img src="img/titulo.png" alt="Pekehime Performance 2026" class="title-image" />
+        </h1>
+      </header>
+
+      <main class="main">
+        <section id="start-screen" class="card start-screen" aria-live="polite">
+          <div class="start-media-block">
+            <div class="question-video-frame">
+              <video
+                id="start-presenta-video"
+                class="question-video"
+                src="vids/Presenta.mp4"
+                playsinline
+                preload="auto"
+                disablePictureInPicture
+              ></video>
+            </div>
+          </div>
+
+          <div class="start-content">
+            <h2 class="start-heading">¿Listo para jugar?</h2>
+            <p class="start-text">
+              - Se irán presentando varias secciones, cada cual tendrá unas pruebas distintas.<br/>
+              - Dispones de cierta cantidad de tiempo por pregunta, y si se acaba el tiempo, la respuesta contará como incorrecta.<br/>
+              - El turno de los jugadores se determina dependiendo de la prueba en curso.<br/>
+              - Por supuesto, ¡prohibido usar el teléfono o cualquier dispositivo!.
+            </p>
+            <div class="participants-manager">
+              <label class="participants-label" for="participant-name">Nombre del nuevo participante:</label>
+              <div class="participants-entry">
+                <input
+                  type="text"
+                  id="participant-name"
+                  class="participant-input"
+                  placeholder="Escribe un nombre"
+                  autocomplete="off"
+                  maxlength="30"
+                />
+                <button type="button" class="btn btn-secondary" id="btn-add-participant">
+                  Aceptar
+                </button>
+              </div>
+              <p class="participants-help">Añade al menos un participante para comenzar.</p>
+              <ul class="participants-list" id="participants-list" aria-live="polite"></ul>
+            </div>
+            <div class="actions start-actions">
+              <button type="button" class="btn btn-primary btn-large" id="btn-start" disabled>
+                Comenzar
+              </button>
+              <button type="button" class="btn btn-secondary btn-large" id="btn-peleitas">
+                ???
+              </button>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer">
+
+      </footer>
+
+      <audio
+        id="start-music"
+        class="visually-hidden"
+        src="music/1.mp3"
+        autoplay
+        loop
+        preload="auto"
+      ></audio>
+    </div>
+
+    <script src="js/session.js"></script>
+    <script src="js/app-start.js"></script>
+  </body>
+</html>

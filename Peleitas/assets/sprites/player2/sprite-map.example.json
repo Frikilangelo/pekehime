@@ -1,0 +1,16 @@
+{
+  "characterId": "player1",
+  "folder": "assets/sprites/player1",
+  "patternByState": {
+    "idle": "idle_XX.png",
+    "walk": "walk_XX.png",
+    "jump": "jump_XX.png",
+    "block": "block_XX.png",
+    "punch": "punch_XX.png",
+    "kick": "kick_XX.png",
+    "special": "special_XX.png",
+    "hurt": "hurt_XX.png"
+  },
+  "exampleIdleFrames": ["idle_01.png", "idle_02.png", "idle_03.png", "idle_04.png", "idle_05.png"],
+  "notes": "XX es numeracion con 2 digitos. El juego carga en orden y se detiene en el primer faltante."
+}

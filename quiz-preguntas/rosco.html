@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <title>Ronda Rosco</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <div class="app">
+      <header class="header">
+        <h1 class="title">
+          <img src="img/titulo.png" alt="Pekehime Performance 2026" class="title-image" />
+        </h1>
+      </header>
+
+      <main class="main">
+        <section id="rosco-intro-screen" class="card interphase-screen" aria-live="polite">
+          <h1 class="start-heading0 interphase-title interphase-main-title">
+            - La vida trata sobre hacer decisiones consecutivas -
+          </h1>
+          <h2 class="start-heading interphase-title">Aparecera un rosco con las letras del abecedario</h2>
+          <h4 class="start-heading interphase-title">Todos los jugadores participan por turnos, empezando por el que tenga menos puntos.</h4>
+          <h4 class="start-heading interphase-title">Las preguntas seran entradas de la pokedex de pokemon, y hay que adivinar el pokemon que empieza por esa letra.</h4>
+          <h4 class="start-heading interphase-title">Primera vuelta: 30 s por turno; desde la segunda vuelta: 15 s y una pista extra.</h4>
+          <h4 class="start-heading interphase-title">Acierto: +1 por letra; fallo o tiempo agotado: -1.</h4>
+          <h4 class="start-heading interphase-title">Si pasaspalabra solo saltaras turno y no perderas puntos</h4>
+          <h4 class="start-heading interphase-title">Si fallas, la letra queda pendiente. Al acabar la vuelta se repiten las pendientes.</h4>
+          <div class="actions interphase-actions">
+            <button type="button" class="btn btn-primary btn-large" id="btn-rosco-intro-continue">
+              Continuar
+            </button>
+          </div>
+        </section>
+
+        <section id="rosco-screen" class="card rosco-screen hidden" aria-live="polite">
+          <aside class="rosco-scoreboard-block">
+            <p class="results-board-title">Clasificacion</p>
+            <ul class="results-board" id="rosco-scoreboard"></ul>
+          </aside>
+
+          <div class="rosco-main-block">
+            <p class="price-feedback rosco-player-label" id="rosco-player-label"></p>
+
+            <div class="timer-block" id="rosco-timer-block">
+              <div class="timer-row">
+                <span class="timer-message" id="rosco-timer-message">Tiempo para responder</span>
+                <span class="timer-count-wrap" aria-live="polite"
+                  ><span class="timer-count" id="rosco-timer-count">30</span
+                  ><span class="timer-suffix"> s</span></span
+                >
+              </div>
+              <div class="timer-bar" aria-hidden="true">
+                <div class="timer-bar-fill" id="rosco-timer-bar-fill"></div>
+              </div>
+            </div>
+
+            <div class="rosco-wheel-wrap" aria-hidden="true">
+              <div class="rosco-wheel" id="rosco-wheel"></div>
+              <div class="rosco-wheel-center">
+                <img
+                  src="img/pokeball.png"
+                  alt=""
+                  class="rosco-wheel-center-image"
+                  width="116"
+                  height="116"
+                />
+              </div>
+            </div>
+
+            <h2 class="question rosco-clue" id="rosco-clue-text"></h2>
+
+            <div class="rosco-hint-block hidden" id="rosco-hint-block" aria-live="polite">
+              <p class="rosco-hint-label">Pista</p>
+              <p class="rosco-hint-text" id="rosco-hint-text"></p>
+            </div>
+
+            <div class="rosco-answer-row">
+              <input
+                id="rosco-answer-input"
+                class="price-input"
+                type="text"
+                maxlength="120"
+                autocomplete="off"
+                placeholder="Escribe la respuesta"
+              />
+            </div>
+
+            <div class="actions rosco-answer-actions">
+              <button type="button" class="btn btn-primary" id="btn-rosco-confirm">Confirmar</button>
+              <button type="button" class="btn btn-secondary" id="btn-rosco-pass">Pasapalabra</button>
+            </div>
+
+            <p class="price-feedback rosco-feedback" id="rosco-feedback" aria-live="polite"></p>
+          </div>
+        </section>
+
+        <section id="results-screen" class="card results-screen hidden" aria-live="polite">
+          <h2 class="results-title">Resultados finales</h2>
+          <div class="results-entrefase-video-block question-video-block">
+            <div class="question-video-frame">
+              <video
+                id="results-entrefase-video"
+                class="results-entrefase-video"
+                src="vids/entrefases5.mp4"
+                playsinline
+                preload="none"
+                disablePictureInPicture
+                tabindex="-1"
+                aria-label="Vídeo de entrefase en resultados finales"
+              ></video>
+            </div>
+          </div>
+          <div class="results-board-block">
+            <p class="results-board-title">Puntuaciones acumuladas</p>
+            <ul class="results-board" id="results-board"></ul>
+          </div>
+          <div class="actions results-actions">
+            <button type="button" class="btn btn-primary" id="btn-restart">Volver al inicio</button>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <audio
+      id="rosco-intro-music"
+      class="visually-hidden"
+      src="music/Entrefases 5.mp3"
+      preload="auto"
+    ></audio>
+    <audio
+      id="rosco-bg-music"
+      class="visually-hidden"
+      src="music/6.mp3"
+      loop
+      preload="auto"
+    ></audio>
+    <audio
+      id="rosco-results-bg-music"
+      class="visually-hidden"
+      src="music/7.mp3"
+      loop
+      preload="auto"
+    ></audio>
+    <audio
+      id="rosco-sfx-good"
+      class="visually-hidden"
+      src="music/zgood.mp3"
+      preload="auto"
+    ></audio>
+    <audio
+      id="rosco-sfx-bad"
+      class="visually-hidden"
+      src="music/zbad.mp3"
+      preload="auto"
+    ></audio>
+
+    <script src="js/session.js"></script>
+    <script src="js/questions.js"></script>
+    <script src="js/rosco.js"></script>
+  </body>
+</html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <title>Ronda Ahorcado</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <div class="app">
+      <header class="header">
+        <h1 class="title">
+          <img src="img/titulo.png" alt="Pekehime Performance 2026" class="title-image" />
+        </h1>
+      </header>
+
+      <main class="main">
+        <section id="hangman-intro-screen" class="card interphase-screen" aria-live="polite">
+          <h1 class="start-heading0 interphase-title interphase-main-title">
+            - Es grosero llamar a alguien por un nombre erróneo -
+          </h1>
+          <h2 class="start-heading interphase-title">
+            ¡Descubre la pelicula letra a letra!
+          </h2>
+          <h4 class="start-heading interphase-title">El último jugador de la clasificacion comenzara la ronda.</h4>
+          <h4 class="start-heading interphase-title">Cada acierto de letra suma 1 punto.</h4>
+          <h4 class="start-heading interphase-title">Cada fallo de letra resta 1 punto.</h4>
+          <h4 class="start-heading interphase-title">Se juega por turnos hasta completar la pelicula.</h4>
+          <div class="actions interphase-actions">
+            <button type="button" class="btn btn-primary btn-large" id="btn-hangman-intro-continue">
+              Continuar
+            </button>
+          </div>
+        </section>
+
+        <section id="hangman-screen" class="card hangman-screen hidden" aria-live="polite">
+          <aside class="hangman-scoreboard-block">
+            <div class="hangman-media-block">
+              <p class="question-video-label">Vídeo</p>
+              <div class="question-video-frame">
+                <video
+                  id="hangman-video"
+                  class="question-video"
+                  playsinline
+                  preload="metadata"
+                  disablePictureInPicture
+                ></video>
+              </div>
+            </div>
+            <p class="results-board-title">Clasificación</p>
+            <ul class="results-board" id="hangman-scoreboard"></ul>
+          </aside>
+
+          <div class="hangman-main-block">
+            <p class="question-index" id="hangman-word-index">Palabra 1</p>
+            <h2 class="hangman-word" id="hangman-word-mask">_ _ _ _</h2>
+            <div class="hangman-media-block">
+              <p class="question-video-label">Letras validadas</p>
+              <p class="hangman-used-letters" id="hangman-used-letters">-</p>
+            </div>
+            <p class="price-feedback hangman-turn-label" id="hangman-turn-label"></p>
+            <div class="timer-block" id="hangman-timer-block">
+              <div class="timer-row">
+                <span class="timer-message" id="hangman-timer-message">Tiempo para responder</span>
+                <span class="timer-count-wrap" aria-live="polite"
+                  ><span class="timer-count" id="hangman-timer-count">20</span
+                  ><span class="timer-suffix"> s</span></span
+                >
+              </div>
+              <div class="timer-bar" aria-hidden="true">
+                <div class="timer-bar-fill" id="hangman-timer-bar-fill"></div>
+              </div>
+            </div>
+
+            <div class="hangman-input-row">
+              <input
+                id="hangman-letter-input"
+                class="price-input hangman-letter-input"
+                type="text"
+                maxlength="1"
+                autocomplete="off"
+                placeholder="Escribe una letra"
+              />
+              <button type="button" class="btn btn-primary" id="btn-hangman-guess">Confirmar letra</button>
+            </div>
+
+            <p class="price-feedback hangman-feedback" id="hangman-feedback" aria-live="polite"></p>
+
+            <div class="actions">
+              <button type="button" class="btn btn-primary hidden" id="btn-hangman-next-word">
+                Siguiente palabra
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <section id="results-screen" class="card results-screen hidden" aria-live="polite">
+          <h2 class="results-title">Resultados hasta el momento</h2>
+          <div class="results-entrefase-video-block question-video-block">
+            <div class="question-video-frame">
+              <video
+                id="results-entrefase-video"
+                class="results-entrefase-video"
+                src="vids/entrefases3.mp4"
+                playsinline
+                preload="none"
+                disablePictureInPicture
+                tabindex="-1"
+                aria-label="Vídeo de entrefase entre ahorcado y eleccion"
+              ></video>
+            </div>
+          </div>
+          <div class="results-board-block">
+            <p class="results-board-title">Puntuaciones acumuladas</p>
+            <ul class="results-board" id="results-board"></ul>
+          </div>
+          <div class="actions results-actions">
+            <button type="button" class="btn btn-primary" id="btn-go-election">Continuar</button>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <audio
+      id="hangman-intro-music"
+      class="visually-hidden"
+      src="music/Entrefases 3.mp3"
+      preload="auto"
+    ></audio>
+    <audio
+      id="hangman-bg-music"
+      class="visually-hidden"
+      src="music/4.mp3"
+      loop
+      preload="auto"
+    ></audio>
+    <audio
+      id="hangman-sfx-good"
+      class="visually-hidden"
+      src="music/zgood.mp3"
+      preload="auto"
+    ></audio>
+    <audio
+      id="hangman-sfx-bad"
+      class="visually-hidden"
+      src="music/zbad.mp3"
+      preload="auto"
+    ></audio>
+
+    <script src="js/session.js"></script>
+    <script src="js/questions.js"></script>
+    <script src="js/hangman.js"></script>
+  </body>
+</html>

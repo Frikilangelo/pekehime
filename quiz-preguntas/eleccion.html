@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <title>Ronda Eleccion</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <div class="app">
+      <header class="header">
+        <h1 class="title">
+          <img src="img/titulo.png" alt="Pekehime Performance 2026" class="title-image" />
+        </h1>
+      </header>
+
+      <main class="main">
+        <section id="election-intro-screen" class="card interphase-screen" aria-live="polite">
+          <h1 class="start-heading0 interphase-title interphase-main-title">
+            - El enemigo de ayer es por algún motivo el enemigo de hoy -
+          </h1>
+          <h2 class="start-heading interphase-title">Cada jugador respondera una pregunta en orden de clasificacion.</h2>
+          <h4 class="start-heading interphase-title">Las preguntas esta vez estaran escritas para poder leerlas.</h4>
+          <h4 class="start-heading interphase-title">El jugador en curso tendra mas tiempo para responder que el resto de jugadores.</h4>
+          <h4 class="start-heading interphase-title">Quien responde escribe una respuesta libre en el cuadro de texto.</h4>
+          <h4 class="start-heading interphase-title">Tendra que responder entre dos posibilidades.</h4>
+          <h4 class="start-heading interphase-title">El resto decide en orden aleatorio si estan A favor o En contra de la respuesta.</h4>
+          <h4 class="start-heading interphase-title">Acierto: +3 al que responde y +1 a quienes esten en A favor.</h4>
+          <h4 class="start-heading interphase-title">Fallo: +1 a quienes esten en En contra.</h4>
+          <h4 class="start-heading interphase-title">Si se pasa el tiempo y no ha votado una respuesta, ni suma ni resta punto.</h4>
+          <div class="actions interphase-actions">
+            <button type="button" class="btn btn-primary btn-large" id="btn-election-intro-continue">
+              Continuar
+            </button>
+          </div>
+        </section>
+
+        <section id="election-screen" class="card election-screen hidden" aria-live="polite">
+          <aside class="election-scoreboard-block">
+            <div class="election-media-block">
+              <p class="question-video-label">Video</p>
+              <div class="question-video-frame">
+                <video
+                  id="election-video"
+                  class="question-video"
+                  playsinline
+                  preload="metadata"
+                  disablePictureInPicture
+                ></video>
+              </div>
+            </div>
+            <p class="results-board-title">Clasificacion</p>
+            <ul class="results-board" id="election-scoreboard"></ul>
+          </aside>
+
+          <div class="election-main-block">
+            <p class="question-index" id="election-round-index">Ronda 1</p>
+            <div class="timer-block hidden" id="election-timer-block">
+              <div class="timer-row">
+                <span class="timer-message" id="election-timer-message">Tiempo para responder</span>
+                <span class="timer-count-wrap" aria-live="polite"
+                  ><span class="timer-count" id="election-timer-count">30</span
+                  ><span class="timer-suffix"> s</span></span
+                >
+              </div>
+              <div class="timer-bar" aria-hidden="true">
+                <div class="timer-bar-fill" id="election-timer-bar-fill"></div>
+              </div>
+            </div>
+            <h2 class="question" id="election-question-text"></h2>
+            <p class="price-feedback election-turn-label" id="election-turn-label"></p>
+
+            <div class="election-answer-row">
+              <label class="price-input-label" for="election-answer-input">Respuesta del jugador</label>
+              <input
+                id="election-answer-input"
+                class="price-input"
+                type="text"
+                maxlength="180"
+                autocomplete="off"
+                placeholder="Escribe la respuesta"
+              />
+            </div>
+
+            <div class="actions election-answer-actions">
+              <button type="button" class="btn btn-primary" id="btn-election-submit-answer">
+                Confirmar respuesta
+              </button>
+            </div>
+
+            <div class="players-pool" id="election-players-pool" aria-label="Jugador en turno de voto"></div>
+
+            <div class="election-vote-grid">
+              <div class="election-vote-option" data-vote="favor" id="election-vote-favor">
+                <p class="election-vote-title">A favor</p>
+                <div class="answer-drop-slot" id="election-slot-favor"></div>
+              </div>
+              <div class="election-vote-option" data-vote="against" id="election-vote-against">
+                <p class="election-vote-title">En contra</p>
+                <div class="answer-drop-slot" id="election-slot-against"></div>
+              </div>
+            </div>
+
+            <p class="price-feedback" id="election-feedback"></p>
+
+            <div class="actions">
+              <button type="button" class="btn btn-primary hidden" id="btn-election-next-round">
+                Siguiente ronda
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <section id="results-screen" class="card results-screen hidden" aria-live="polite">
+          <h2 class="results-title">Resultados hasta el momento</h2>
+          <div class="results-entrefase-video-block question-video-block">
+            <div class="question-video-frame">
+              <video
+                id="results-entrefase-video"
+                class="results-entrefase-video"
+                src="vids/entrefases4.mp4"
+                playsinline
+                preload="none"
+                disablePictureInPicture
+                tabindex="-1"
+                aria-label="Vídeo de entrefase entre eleccion y rosco"
+              ></video>
+            </div>
+          </div>
+          <div class="results-board-block">
+            <p class="results-board-title">Puntuaciones acumuladas</p>
+            <ul class="results-board" id="results-board"></ul>
+          </div>
+          <div class="actions results-actions">
+            <button type="button" class="btn btn-primary" id="btn-go-rosco">Continuar</button>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <audio
+      id="election-intro-music"
+      class="visually-hidden"
+      src="music/Entrefases 4.mp3"
+      preload="auto"
+    ></audio>
+    <audio
+      id="election-bg-music"
+      class="visually-hidden"
+      src="music/5.mp3"
+      loop
+      preload="auto"
+    ></audio>
+
+    <script src="js/session.js"></script>
+    <script src="js/questions.js"></script>
+    <script src="js/eleccion.js"></script>
+  </body>
+</html>
