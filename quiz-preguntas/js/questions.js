@@ -157,11 +157,11 @@ window.ELECTION_QUESTIONS = [
   { text: "¿Quien invento la World Wide Web (el internet de hoy en dia), Inglaterra o Alemania?", answers: ["inglaterra"] },
   { text: "¿En que año fue el primer Eurovision, 1954 o 1956?", answers: ["1956"] },
   { text: "¿Cuantas comunidades autónomas hay en España, par o impar?", answers: ["impar"] },
-  { text: "Pregunta de eleccion 8.", answers: ["Respuesta ejemplo 8"] },
-  { text: "Pregunta de eleccion 9.", answers: ["Respuesta ejemplo 9"] },
-  { text: "Pregunta de eleccion 10.", answers: ["Respuesta ejemplo 10"] },
-  { text: "Pregunta de eleccion 5.", answers: ["Respuesta ejemplo 11"] },
-  { text: "Pregunta de eleccion 5.", answers: ["Respuesta ejemplo 12"] },
+  { text: "¿Cuantas barras inclinadas tiene el logo de Adidas, tres o cuatro?", answers: ["tres"] },
+  { text: "Cuantas veces a ganado Eurovision España, una cantidad par o impar", answers: ["par"] },
+  { text: "Cuantos dedos tienen los personajes de los Simpsons en los pies, cuatro o cinco?", answers: ["cuatro"] },
+  { text: "¿El manga de Dragon Ball Z tiene mas o menos de 500 capitulos?", answers: ["mas"] },
+  { text: "Hay mas o menos de 120 elementos en la tabla periodica", answers: ["menos"] },
 ];
 
 /**
