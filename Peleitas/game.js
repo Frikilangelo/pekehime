@@ -1009,14 +1009,25 @@ function getAttackHitbox(fighter) {
   const hurt = getHurtbox(fighter);
   const minAttackWidth = Math.max(1, Math.round(atk.range * 0.35));
   const reachFromBody = attackKind === "kick" ? 0.52 : 0.34;
-  const attackWidth = Math.max(minAttackWidth, Math.round(hurt.w * reachFromBody));
+  // El cuerpo dibujado es mucho mas estrecho que el cuadro del luchador, asi que la
+  // caja debe salir por delante del hurtbox para alcanzar al rival.
+  const forwardReach = Math.round(atk.range * 0.8);
+  const bodyOverlap = Math.round(hurt.w * 0.25);
+  const attackWidth = Math.max(
+    minAttackWidth,
+    Math.round(hurt.w * reachFromBody),
+    bodyOverlap + forwardReach,
+  );
   const attackHeight = Math.max(
     1,
     Math.round(atk.h * 0.55),
     Math.round(hurt.h * 0.72),
   );
   const attackY = hurt.y + (hurt.h - attackHeight) * 0.5;
-  const x = fighter.facing > 0 ? hurt.x + hurt.w - attackWidth : hurt.x;
+  const x =
+    fighter.facing > 0
+      ? hurt.x + hurt.w - bodyOverlap
+      : hurt.x + bodyOverlap - attackWidth;
   return {
     x,
     y: attackY,
