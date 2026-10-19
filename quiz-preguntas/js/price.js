@@ -815,7 +815,7 @@
     elResultsTitle.textContent = "Resultados hasta el momento";
     if (elBtnGoHangman) elBtnGoHangman.classList.toggle("hidden", HANGMAN_TOTAL === 0);
     elBtnRestart.classList.toggle("hidden", HANGMAN_TOTAL > 0);
-    elScoreTotal.textContent = String(CLASSIC_TOTAL + PRICE_TOTAL);
+    if (elScoreTotal) elScoreTotal.textContent = String(CLASSIC_TOTAL + PRICE_TOTAL);
     renderResultsBoard("classic");
   }
 

@@ -639,7 +639,7 @@
     elResults.classList.remove("hidden");
     prepareResultsEntrefaseVideo();
 
-    elScoreTotal.textContent = String(QUIZ_TOTAL + PRICE_TOTAL + HANGMAN_TOTAL + totalElectionRounds);
+    if (elScoreTotal) elScoreTotal.textContent = String(QUIZ_TOTAL + PRICE_TOTAL + HANGMAN_TOTAL + totalElectionRounds);
     if (!elResultsBoard) return;
     elResultsBoard.innerHTML = "";
     participants

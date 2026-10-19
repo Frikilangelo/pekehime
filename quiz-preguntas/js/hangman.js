@@ -453,7 +453,7 @@
     elResults.classList.remove("hidden");
     prepareResultsEntrefaseVideo();
 
-    elScoreTotal.textContent = String(QUIZ_TOTAL + PRICE_TOTAL + HANGMAN_TOTAL);
+    if (elScoreTotal) elScoreTotal.textContent = String(QUIZ_TOTAL + PRICE_TOTAL + HANGMAN_TOTAL);
     if (!elResultsBoard) return;
     elResultsBoard.innerHTML = "";
     getSortedIndicesByRanking().forEach(function (participantIndex) {
